@@ -23,7 +23,8 @@ class DriverLicenseUpdateForm(forms.ModelForm):
             .exclude(pk=self.instance.pk)
             .exists()
         ):
-            raise (forms.ValidationError("This license number is already taken."))
+            raise (forms.ValidationError
+                   ("This license number is already taken."))
 
         if len(license_number) != 8:
             raise forms.ValidationError(
@@ -31,15 +32,18 @@ class DriverLicenseUpdateForm(forms.ModelForm):
             )
 
         if not license_number[:3].isalpha():
-            raise (forms.ValidationError("The first three characters must be letters."))
+            raise (forms.ValidationError
+                   ("The first three characters must be letters."))
 
         if not license_number[:3].isupper():
             raise (
-                forms.ValidationError("The first three characters must be uppercase.")
+                forms.ValidationError
+                ("The first three characters must be uppercase.")
             )
 
         if not license_number[3:].isdigit():
-            raise (forms.ValidationError("The last five characters must be digits."))
+            raise (forms.ValidationError
+                   ("The last five characters must be digits."))
 
         return license_number
 
